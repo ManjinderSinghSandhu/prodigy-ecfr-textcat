@@ -12,7 +12,6 @@ Our goal is to organize these financial institution rules and regulations so fin
   - [Installation](#installation)
 - [Usage](#usage)
 - [File Structure](#file-structure)
-- [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
 
