@@ -18,6 +18,6 @@ with jsonlines.open(unlabeled_data_file) as reader:
         classified_data.append({"text": text, "predicted_labels": predicted_labels})
 
 # Optionally, you can save the classified data to a file or process it further
-output_file = "thirdStep_file.jsonl"
+output_file = "data/thirdStep_file.jsonl"
 with jsonlines.open(output_file, mode="w") as writer:
     writer.write_all(classified_data)
