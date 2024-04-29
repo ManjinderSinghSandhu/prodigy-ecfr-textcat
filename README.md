@@ -156,12 +156,6 @@ Describe the organization of files and directories within the project.
 - `README.md`
 - `prodigy.json`
 
-
-
-## Contributing
-
-Guidelines for contributing to the project, including how to report bugs or suggest improvements.
-
 ## License
 
 - Package A: MIT License
