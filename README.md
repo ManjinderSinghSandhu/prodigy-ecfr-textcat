@@ -75,6 +75,19 @@ Describe the organization of files and directories within the project.
       - `config.cfg`
       - `meta.json`
       - `tokenizer`
+    - `/model-last`
+      - `/textcat_multilabel`
+        - `cfg`
+        - `model`
+      - `/vocab`
+        - `key2row`
+        - `lookups.bin`
+        - `strings.json`
+        - `vectors`
+        - `vectors.cfg`
+      - `config.cfg`
+      - `meta.json`
+      - `tokenizer`
 - `.gitignore`
 - `Project Milestone 3-WriteUp.pdf`
 - `Project3TerminalCode.txt`
