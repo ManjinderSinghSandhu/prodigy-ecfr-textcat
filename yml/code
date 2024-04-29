@@ -148,6 +148,14 @@ assets:
   - dest: "prodigy.json"
     description: "JSON file containing Prodigy configuration"
 
+workflows:
+  all:
+    - download
+    - run-first-step-format
+    - train-text-classification-model
+    - classify-unlabeled-data
+    - format-labeled-data
+
 commands:
   - name: "execute-first-step-format-script"
     help: |
