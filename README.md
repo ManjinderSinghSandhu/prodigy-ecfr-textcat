@@ -153,6 +153,8 @@ Describe the organization of files and directories within the project.
   - `train_eval_split.ipynb`
 - `TerminalCode.txt`
 - `requirements.txt`
+- `Terminal Commands vs Project.yml`
+- `Project.yml`
 - `README.md`
 - `prodigy.json`
 
