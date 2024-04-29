@@ -128,7 +128,7 @@ Describe the organization of files and directories within the project.
   - `secondStep-score.py`
   - `thirdStep-label.py`
   - `train_eval_split.ipynb`
-- `Project3TerminalCode.txt`
+- `TerminalCode.txt`
 - `README.md`
 - `prodigy.json`
 
