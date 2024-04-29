@@ -121,6 +121,14 @@ Describe the organization of files and directories within the project.
       - `config.cfg`
       - `meta.json`
       - `tokenizer`
+- `/python_Code`
+  - `finalStep-formatLabel.py`
+  - `firstStep-format.py`
+  - `five_examples_annotated.ipynb`
+  - `secondStep-score.py`
+  - `thirdStep-label.py`
+  - `train_eval_split.ipynb`
+
 
 ## Contributing
 
