@@ -15,7 +15,7 @@ textcat.add_label("ReportingAndCompliance")
 textcat.add_label("CorporateGovernance")
 
 # Path to the processed data file
-processed_data_file = "firstStep_file.jsonl"
+processed_data_file = "data/firstStep_file.jsonl"
 
 # Open the JSONL file and extract text and labels
 with jsonlines.open(processed_data_file) as reader:
