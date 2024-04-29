@@ -1,0 +1,10 @@
+{
+  "labels":[
+    "CapitalRequirements",
+    "ConsumerProtection",
+    "RiskManagement",
+    "ReportingAndCompliance",
+    "CorporateGovernance"
+  ],
+  "threshold":0.5
+}
