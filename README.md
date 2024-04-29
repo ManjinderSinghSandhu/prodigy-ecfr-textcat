@@ -45,11 +45,36 @@ Describe the organization of files and directories within the project.
     - `tagger.json`
     - `textcat_multilabel.json`
 - `/data`
+  - `eval.jsonl`
+  - `train.jsonl`
 - `/my_trained_model`
+  - `/textcat_multilabel`
+    - `cfg`
+    - `model`
+  - `/vocab`
+    - `key2row`
+    - `lookups.bin`
+    - `strings.json`
+    - `vectors`
+    - `vectors.cfg`
+  - `config.cfg`
+  - `meta.json`
+  - `tokenizer`
 - `/output`
-- `/experiments`
-  - `experiment1`
-  - `experiment3`
+  - `/experiment1`
+    - `/model-best`
+      - `/textcat_multilabel`
+        - `cfg`
+        - `model`
+      - `/vocab`
+        - `key2row`
+        - `lookups.bin`
+        - `strings.json`
+        - `vectors`
+        - `vectors.cfg`
+      - `config.cfg`
+      - `meta.json`
+      - `tokenizer`
 - `.gitignore`
 - `Project Milestone 3-WriteUp.pdf`
 - `Project3TerminalCode.txt`
