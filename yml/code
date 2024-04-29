@@ -1,0 +1,19 @@
+- name: "format-initial-dataset"
+  help: |
+    Format the initial dataset for the first step of the project using the `firstStep-format.py` script. This script extracts text and labels from a dataset file in JSONL format and writes them to a new JSONL file in a specific format.
+
+    Usage:
+    ```
+    spacy project run format-initial-dataset
+    ```
+
+    Explanation:
+    - The script `firstStep-format.py` reads data from the file specified in the `dataset_file` variable (`data/train200.jsonl` by default).
+    - It extracts text and labels from each JSON object in the dataset file.
+    - If both text and at least one label are available, it writes a new JSON object to the output file specified in the `output_file` variable (`data/firstStep_file.jsonl` by default) with the extracted text and label.
+    - If either text or label is missing in a JSON object, a warning message is printed.
+    - Upon completion, the script prints a message confirming the processing and the path to the output file.
+  script:
+    - "python3 python_Code/firstStep-format.py"
+
+
