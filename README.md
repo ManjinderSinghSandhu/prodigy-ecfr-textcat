@@ -164,7 +164,7 @@ Guidelines for contributing to the project, including how to report bugs or sugg
 
 ## License
 
-Specify the project's license (e.g., MIT License, Apache License 2.0).
+MIT License and Apache License 2.0
 
 ## Acknowledgements
 
