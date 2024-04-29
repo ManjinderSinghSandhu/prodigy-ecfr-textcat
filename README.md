@@ -50,10 +50,10 @@ Describe the organization of files and directories within the project.
 - **Project3TerminalCode.txt**: (Description)
 - **README.md**: (This file)
 - **finalStep-formatLabel.py**: (Description)
-- **firstStep-format.py**: (Description)
+- **firstStep-format.py**: This python file formats the original jsonl file so that it is easier for the Spacy model to read
 - **firstStep_file.jsonl**: (Description)
-- **five_examples_annotated.ipynb**: (Description)
-- **five_examples_annotated5.jsonl**: (Description)
+- **five_examples_annotated.ipynb**: This file scores comments for proposals on changes in banking regulations based on out text classification categories.
+- **five_examples_annotated5.jsonl**: This file lists the five comments that will be scored for the different labels using code from 'five_examples_annotated.ipynb'
 - **goldenEval.jsonl**: (Description)
 - **prodigy.json**: (Description)
 - **project3_trainComplete.jsonl**: (Description)
