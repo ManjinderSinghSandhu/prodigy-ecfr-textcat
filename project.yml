@@ -178,6 +178,7 @@ workflows:
     - train-text-classification-model
     - classify-unlabeled-data
     - format-labeled-data
+    - setup-environment
 
 commands:
   - name: "format-script"
@@ -251,3 +252,11 @@ commands:
       - The transformed data is written to the file specified in the `output_file` variable (`data/train4465.jsonl` by default).
     script:
       - "python3 python_Code/finalStep-formatLabel.py"
+      commands:
+      
+  - name: "setup-environment"
+    help: |
+      Set up the Python virtual environment.
+    script:
+      - "python3 -m virtualenv venv"
+      - "source venv/bin/activate"
