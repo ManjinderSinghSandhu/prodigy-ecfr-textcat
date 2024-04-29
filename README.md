@@ -46,7 +46,13 @@ Describe the organization of files and directories within the project.
     - `textcat_multilabel.json`
 - `/data`
   - `eval.jsonl`
+  - `firstStep_file.jsonl`
+  - `five_examples_annotated5.jsonl`
+  - `goldenEval.jsonl`
+  - `thirdStep_file.jsonl`
   - `train.jsonl`
+  - `train200.jsonl`
+  - `train4465.jsonl`
 - `/my_trained_model`
   - `/textcat_multilabel`
     - `cfg`
@@ -115,15 +121,6 @@ Describe the organization of files and directories within the project.
       - `config.cfg`
       - `meta.json`
       - `tokenizer`
-- `/data`
-  - `eval.jsonl`
-  - `firstStep_file.jsonl`
-  - `five_examples_annotated5.jsonl`
-  - `goldenEval.jsonl`
-  - `thirdStep_file.jsonl`
-  - `train.jsonl`
-  - `train200.jsonl`
-  - `train4465.jsonl`
 
 ## Contributing
 
