@@ -37,9 +37,10 @@ Follow these step-by-step instructions to install and configure the project:
    ```bash
    git clone <https://github.com/ManjinderUNCC/prodigy-ecfr-textcat>
 2. Install the required dependencies by running:
-`` `bash
+```bash
 pip install -r requirements.txt
-`` ``
+```
+
 
 ## Usage
 
