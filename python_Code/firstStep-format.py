@@ -1,10 +1,10 @@
 import jsonlines
 
 # Path to your dataset file
-dataset_file = "train200.jsonl"
+dataset_file = "data/train200.jsonl"
 
 # Path to the output file
-output_file = "firstStep_file.jsonl"
+output_file = "data/firstStep_file.jsonl"
 
 # Open the JSONL file and extract text and labels
 try:
