@@ -115,23 +115,15 @@ Describe the organization of files and directories within the project.
       - `config.cfg`
       - `meta.json`
       - `tokenizer`
-- `.gitignore`
-- `Project Milestone 3-WriteUp.pdf`
-- `Project3TerminalCode.txt`
-- `README.md`
-- `finalStep-formatLabel.py`
-- `firstStep-format.py`
-- `firstStep_file.jsonl`
-- `five_examples_annotated.ipynb`
-- `five_examples_annotated5.jsonl`
-- `goldenEval.jsonl`
-- `prodigy.json`
-- `project3_trainComplete.jsonl`
-- `secondStep-score.py`
-- `splitData.ipynb`
-- `thirdStep-label.py`
-- `thirdStep_file.jsonl`
-- `train200a.jsonl`
+- `/data`
+  - `eval.jsonl`
+  - `firstStep_file.jsonl`
+  - `five_examples_annotated5.jsonl`
+  - `goldenEval.jsonl`
+  - `thirdStep_file.jsonl`
+  - `train.jsonl`
+  - `train200.jsonl`
+  - `train4465.jsonl`
 
 ## Contributing
 
