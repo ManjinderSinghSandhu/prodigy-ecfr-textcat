@@ -174,14 +174,13 @@ assets:
 
 workflows:
   all:
-    - download
-    - run-first-step-format
+    - format-script
     - train-text-classification-model
     - classify-unlabeled-data
     - format-labeled-data
 
 commands:
-  - name: "execute-first-step-format-script"
+  - name: "format-script"
     help: |
       Execute the Python script `firstStep-format.py`, which performs the initial formatting of a dataset file for the first step of the project. This script extracts text and labels from a dataset file in JSONL format and writes them to a new JSONL file in a specific format.
       
