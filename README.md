@@ -164,7 +164,8 @@ Guidelines for contributing to the project, including how to report bugs or sugg
 
 ## License
 
-MIT License and Apache License 2.0
+- Package A: MIT License
+- Package B: Apache License 2.0
 
 ## Acknowledgements
 
