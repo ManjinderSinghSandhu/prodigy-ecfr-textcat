@@ -1,8 +1,32 @@
 # Title and description of the project
 title: "NER Citations of ECFR Banking Regulation in a spaCy pipeline."
-description: "Custom NER project for spaCy v3 adapted from the spaCy v3 [`ner_demo`](https://github.com/explosion/projects/tree/9d5fce5f95ddf5f35c3370b2074b25e995525f51/pipelines/ner_demo) example script for creating an NER component in a new pipeline."
+description: "Custom text classification project for spaCy v3 adapted from the spaCy v3 [`ner_demo`](https://github.com/explosion/projects/tree/9d5fce5f95ddf5f35c3370b2074b25e995525f51/pipelines/ner_demo) example script for creating an NER component in a new pipeline."
 
 directories: ["corpus/labels", "data", "my_trained_model/textcat_multilabel", "my_trained_model/vocab", "output/experiment1/model-best/textcat_multilabel", "output/experiment1/model-best/vocab", "output/experiment1/model-last/textcat_multilabel", "output/experiment1/model-last/vocab", "output/experiment3/model-best/textcat_multilabel", "output/experiment3/model-best/vocab", "output/experiment3/model-last/textcat_multilabel", "output/experiment3/model-last/vocab", "python_Code"]
+
+vars:
+  lang: "en"
+  train: corpus/train.spacy
+  dev: corpus/dev.spacy
+  version: "0.1.0"
+  gpu_id: -1
+  vectors_model: "en_core_web_lg"
+  name: ecfr_ner
+  prodigy:
+    ner_labels: ecfr_initial_ner
+    ner_manual_labels: ecfr_manual_ner
+    senter_labels: ecfr_labeled_sents
+    ner_labeled_dataset: ecfr_labeled_ner
+  assets:
+    ner_labels: assets/ecfr_ner_labels.jsonl
+    senter_labels: assets/ecfr_senter_labels.jsonl
+    ner_patterns: assets/patterns.jsonl
+    corpus_labels: corpus/labels
+    data_files: data
+    trained_model: my_trained_model
+    trained_model_textcat: my_trained_model/textcat_multilabel
+    output_models: output
+    python_code: python_Code
 
 assets:
   - dest: "corpus/labels/ner.json"
