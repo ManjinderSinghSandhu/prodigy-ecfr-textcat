@@ -38,35 +38,35 @@ Explain how to use the project, including any command-line arguments, configurat
 
 Describe the organization of files and directories within the project.
 
-- `/corpus`: (Description)
-  - `/labels`: (Description)
+- `/corpus`
+  - `/labels`
     - `ner.json`
     - `parser.json`
     - `tagger.json`
     - `textcat_multilabel.json`
-- `/data`: (Description)
-- `/my_trained_model`: (Description)
-- `/output`: (Description)
-- `/experiments`: (Description)
-  - `experiment1`: (Description)
-  - `experiment3`: (Description)
-- `.gitignore`: (Description)
-- `Project Milestone 3-WriteUp.pdf`: (Description)
-- `Project3TerminalCode.txt`: (Description)
-- `README.md`: (This file)
-- `finalStep-formatLabel.py`: (Description)
-- `firstStep-format.py`: (Description)
-- `firstStep_file.jsonl`: (Description)
-- `five_examples_annotated.ipynb`: (Description)
-- `five_examples_annotated5.jsonl`: (Description)
-- `goldenEval.jsonl`: (Description)
-- `prodigy.json`: (Description)
-- `project3_trainComplete.jsonl`: (Description)
-- `secondStep-score.py`: (Description)
-- `splitData.ipynb`: (Description)
-- `thirdStep-label.py`: (Description)
-- `thirdStep_file.jsonl`: (Description)
-- `train200a.jsonl`: (Description)
+- `/data`
+- `/my_trained_model`
+- `/output`
+- `/experiments`
+  - `experiment1`
+  - `experiment3`
+- `.gitignore`
+- `Project Milestone 3-WriteUp.pdf`
+- `Project3TerminalCode.txt`
+- `README.md`
+- `finalStep-formatLabel.py`
+- `firstStep-format.py`
+- `firstStep_file.jsonl`
+- `five_examples_annotated.ipynb`
+- `five_examples_annotated5.jsonl`
+- `goldenEval.jsonl`
+- `prodigy.json`
+- `project3_trainComplete.jsonl`
+- `secondStep-score.py`
+- `splitData.ipynb`
+- `thirdStep-label.py`
+- `thirdStep_file.jsonl`
+- `train200a.jsonl`
 
 ## Contributing
 
