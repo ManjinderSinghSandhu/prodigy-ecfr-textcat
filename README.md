@@ -38,30 +38,35 @@ Explain how to use the project, including any command-line arguments, configurat
 
 Describe the organization of files and directories within the project.
 
-- **corpus**: (Description)
-- **data**: (Description)
-- **my_trained_model**: (Description)
-- **output**: (Description)
-- **experiments**: (Description)
-  - **experiment1**: (Description)
-  - **experiment3**: (Description)
-- **.gitignore**: (Description)
-- **Project Milestone 3-WriteUp.pdf**: (Description)
-- **Project3TerminalCode.txt**: (Description)
-- **README.md**: (This file)
-- **finalStep-formatLabel.py**: (Description)
-- **firstStep-format.py**: This python file formats the original jsonl file so that it is easier for the Spacy model to read
-- **firstStep_file.jsonl**: (Description)
-- **five_examples_annotated.ipynb**: This file scores comments for proposals on changes in banking regulations based on out text classification categories.
-- **five_examples_annotated5.jsonl**: This file lists the five comments that will be scored for the different labels using code from 'five_examples_annotated.ipynb'
-- **goldenEval.jsonl**: (Description)
-- **prodigy.json**: (Description)
-- **project3_trainComplete.jsonl**: (Description)
-- **secondStep-score.py**: (Description)
-- **splitData.ipynb**: (Description)
-- **thirdStep-label.py**: (Description)
-- **thirdStep_file.jsonl**: (Description)
-- **train200a.jsonl**: (Description)
+- `/corpus`: (Description)
+  - `/labels`: (Description)
+    - `ner.json`
+    - `parser.json`
+    - `tagger.json`
+    - `textcat_multilabel.json`
+- `/data`: (Description)
+- `/my_trained_model`: (Description)
+- `/output`: (Description)
+- `/experiments`: (Description)
+  - `experiment1`: (Description)
+  - `experiment3`: (Description)
+- `.gitignore`: (Description)
+- `Project Milestone 3-WriteUp.pdf`: (Description)
+- `Project3TerminalCode.txt`: (Description)
+- `README.md`: (This file)
+- `finalStep-formatLabel.py`: (Description)
+- `firstStep-format.py`: (Description)
+- `firstStep_file.jsonl`: (Description)
+- `five_examples_annotated.ipynb`: (Description)
+- `five_examples_annotated5.jsonl`: (Description)
+- `goldenEval.jsonl`: (Description)
+- `prodigy.json`: (Description)
+- `project3_trainComplete.jsonl`: (Description)
+- `secondStep-score.py`: (Description)
+- `splitData.ipynb`: (Description)
+- `thirdStep-label.py`: (Description)
+- `thirdStep_file.jsonl`: (Description)
+- `train200a.jsonl`: (Description)
 
 ## Contributing
 
