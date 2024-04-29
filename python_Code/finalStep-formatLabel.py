@@ -1,10 +1,10 @@
 import jsonlines
 
 # Input file containing classified data
-input_file = "thirdStep_file.jsonl"
+input_file = "data/thirdStep_file.jsonl"
 
 # Output file to store transformed data
-output_file = "project3_trainComplete.jsonl"
+output_file = "data/train4465"
 
 # Threshold for considering a label
 threshold = 0.5
