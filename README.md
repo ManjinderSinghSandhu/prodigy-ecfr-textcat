@@ -24,11 +24,20 @@ Instructions on setting up the project on a local machine.
 
 ### Prerequisites
 
-List any software dependencies or libraries required to run the project.
+Before running the project, ensure you have the following software dependencies installed:
+- [Python 3.x](https://www.python.org/downloads/)
+- [spaCy](https://spacy.io/usage)
+- [Prodigy](https://prodi.gy/docs/) (optional)
 
 ### Installation
 
-Step-by-step instructions on how to install and configure the project.
+Follow these step-by-step instructions to install and configure the project:
+
+1. **Clone this repository to your local machine.**
+   ```bash
+   git clone <repository_url>
+1. Clone this repository to your local machine.
+2. Install the required dependencies by running:
 
 ## Usage
 
