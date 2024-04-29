@@ -1,7 +1,7 @@
 import jsonlines
 
 # Path to your dataset file
-dataset_file = "train200a.jsonl"
+dataset_file = "train200.jsonl"
 
 # Path to the output file
 output_file = "firstStep_file.jsonl"
