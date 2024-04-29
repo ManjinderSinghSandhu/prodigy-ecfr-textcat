@@ -41,10 +41,23 @@ Follow these step-by-step instructions to install and configure the project:
 pip install -r requirements.txt
 ```
 
-
 ## Usage
 
-Explain how to use the project, including any command-line arguments, configurations, or examples.
+To use the project, follow these steps:
+
+1. **Prepare your data:**
+   - Place your dataset files in the `/data` directory.
+   - Optionally, annotate your data using Prodigy and save the annotations in the `/data` directory.
+
+2. **Train the text classification model:**
+   - Run the training script located in the `/python_Code` directory.
+
+3. **Evaluate the model:**
+   - Use the evaluation script to assess the model's performance on labeled data.
+
+4. **Make predictions:**
+   - Apply the trained model to new, unlabeled data to classify it into relevant categories.
+
 
 ## File Structure
 
