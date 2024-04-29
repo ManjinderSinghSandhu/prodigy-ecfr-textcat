@@ -168,4 +168,4 @@ Specify the project's license (e.g., MIT License, Apache License 2.0).
 
 ## Acknowledgements
 
-Credits to any individuals, organizations, or resources that contributed to the project.
+Manjinder Sandhu
