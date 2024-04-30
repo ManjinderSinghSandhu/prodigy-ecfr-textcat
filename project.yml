@@ -1,3 +1,4 @@
+
 # Title and description of the project
 title: "Citations of ECFR Banking Regulation in a spaCy pipeline."
 description: "Custom text classification project for spaCy v3 adapted from the spaCy v3"
@@ -260,7 +261,6 @@ commands:
       - The transformed data is written to the file specified in the `output_file` variable (`data/train4465.jsonl` by default).
     script:
       - "python3 python_Code/finalStep-formatLabel.py"
-      commands:
       
   - name: "setup-environment"
     help: |
