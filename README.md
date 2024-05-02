@@ -150,7 +150,7 @@ Describe the organization of files and directories within the project.
   - `secondStep-score.py`
   - `thirdStep-label.py`
   - `train_eval_split.ipynb`
-- `TerminalCode.txt`
+- `TerminalCode.sh`
 - `requirements.txt`
 - `Terminal Commands vs Project.yml`
 - `Project.yml`
