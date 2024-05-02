@@ -22,12 +22,12 @@ vars:
     ner_patterns: assets/patterns.jsonl
     corpus_labels: corpus/labels
     data_files: data
-    trained_model: my_trained_model
-    trained_model_textcat: my_trained_model/textcat_multilabel
+    trained_model: output
+    trained_model_textcat: output/textcat_multilabel
     output_models: output
-    python_code: python_Code
+    scripts: scripts
 
-directories: ["corpus/labels", "data", "my_trained_model/textcat_multilabel", "my_trained_model/vocab", "output/experiment1/model-best/textcat_multilabel", "output/experiment1/model-best/vocab", "output/experiment1/model-last/textcat_multilabel", "output/experiment1/model-last/vocab", "output/experiment3/model-best/textcat_multilabel", "output/experiment3/model-best/vocab", "output/experiment3/model-last/textcat_multilabel", "output/experiment3/model-last/vocab", "python_Code"]
+directories: ["corpus/labels", "data", "output/textcat_multilabel", "output/vocab", "output/experiment1/model-best/textcat_multilabel", "output/experiment1/model-best/vocab", "output/experiment1/model-last/textcat_multilabel", "output/experiment1/model-last/vocab", "output/experiment3/model-best/textcat_multilabel", "output/experiment3/model-best/vocab", "output/experiment3/model-last/textcat_multilabel", "output/experiment3/model-last/vocab", "scripts"]
 
 assets:
   - dest: "corpus/labels/ner.json"
@@ -54,25 +54,25 @@ assets:
     description: "JSONL file containing initial training data"
   - dest: "data/train4465.jsonl"
     description: "JSONL file containing formatted and labeled training data"
-  - dest: "my_trained_model/textcat_multilabel/cfg"
+  - dest: "output/textcat_multilabel/cfg"
     description: "Configuration files for the text classification model"
-  - dest: "my_trained_model/textcat_multilabel/model"
+  - dest: "output/textcat_multilabel/model"
     description: "Trained model files for the text classification model"
-  - dest: "my_trained_model/vocab/key2row"
+  - dest: "output/vocab/key2row"
     description: "Mapping from keys to row indices in the vocabulary"
-  - dest: "my_trained_model/vocab/lookups.bin"
+  - dest: "output/vocab/lookups.bin"
     description: "Binary lookups file for the vocabulary"
-  - dest: "my_trained_model/vocab/strings.json"
+  - dest: "output/vocab/strings.json"
     description: "JSON file containing string representations of the vocabulary"
-  - dest: "my_trained_model/vocab/vectors"
+  - dest: "output/vocab/vectors"
     description: "Directory containing vector files for the vocabulary"
-  - dest: "my_trained_model/vocab/vectors.cfg"
+  - dest: "output/vocab/vectors.cfg"
     description: "Configuration file for vectors in the vocabulary"
-  - dest: "my_trained_model/config.cfg"
+  - dest: "output/config.cfg"
     description: "Configuration file for the trained model"
-  - dest: "my_trained_model/meta.json"
+  - dest: "output/meta.json"
     description: "JSON file containing metadata for the trained model"
-  - dest: "my_trained_model/tokenizer"
+  - dest: "output/tokenizer"
     description: "Tokenizer files for the trained model"
   - dest: "output/experiment1/model-best/textcat_multilabel/cfg"
     description: "Configuration files for the best model in experiment 1"
@@ -154,17 +154,17 @@ assets:
     description: "JSON file containing metadata for the last model in experiment 3"
   - dest: "output/experiment3/model-last/tokenizer"
     description: "Tokenizer files for the last model in experiment 3"
-  - dest: "python_Code/finalStep-formatLabel.py"
+  - dest: "scripts/finalStep-formatLabel.py"
     description: "Python script for formatting labeled data in the final step"
-  - dest: "python_Code/firstStep-format.py"
+  - dest: "scripts/preprocess.py"
     description: "Python script for formatting data in the first step"
-  - dest: "python_Code/five_examples_annotated.ipynb"
+  - dest: "scripts/five_examples_annotated.ipynb"
     description: "Jupyter notebook containing five annotated examples"
-  - dest: "python_Code/secondStep-score.py"
+  - dest: "scripts/secondStep-score.py"
     description: "Python script for scoring data in the second step"
-  - dest: "python_Code/thirdStep-label.py"
+  - dest: "scripts/thirdStep-label.py"
     description: "Python script for labeling data in the third step"
-  - dest: "python_Code/train_eval_split.ipynb"
+  - dest: "scripts/train_eval_split.ipynb"
     description: "Jupyter notebook for training and evaluation data splitting"
   - dest: "TerminalCode.txt"
     description: "Text file containing terminal code"
@@ -192,7 +192,7 @@ workflows:
 commands:
   - name: "format-script"
     help: |
-      Execute the Python script `firstStep-format.py`, which performs the initial formatting of a dataset file for the first step of the project. This script extracts text and labels from a dataset file in JSONL format and writes them to a new JSONL file in a specific format.
+      Execute the Python script `preprocess.py`, which performs the initial formatting of a dataset file for the first step of the project. This script extracts text and labels from a dataset file in JSONL format and writes them to a new JSONL file in a specific format.
       
       Usage:
       ```
@@ -200,13 +200,13 @@ commands:
       ```
 
       Explanation:
-      - The script `firstStep-format.py` reads data from the file specified in the `dataset_file` variable (`data/train200.jsonl` by default).
+      - The script `preprocess.py` reads data from the file specified in the `dataset_file` variable (`data/train200.jsonl` by default).
       - It extracts text and labels from each JSON object in the dataset file.
       - If both text and at least one label are available, it writes a new JSON object to the output file specified in the `output_file` variable (`data/firstStep_file.jsonl` by default) with the extracted text and label.
       - If either text or label is missing in a JSON object, a warning message is printed.
       - Upon completion, the script prints a message confirming the processing and the path to the output file.
     script:
-      - "python3 python_Code/firstStep-format.py"
+      - "python3 scripts/preprocess.py"
 
   - name: "train-text-classification-model"
     help: |
@@ -223,9 +223,9 @@ commands:
       - The processed data is converted to spaCy format for training the model.
       - The model is trained using the converted data for a specified number of iterations (`n_iter`).
       - Losses are printed for each iteration during training.
-      - Upon completion, the trained model is saved to the specified output directory (`./my_trained_model` by default).
+      - Upon completion, the trained model is saved to the specified output directory (`./output` by default).
     script:
-      - "python3 python_Code/secondStep-score.py"
+      - "python3 scripts/secondStep-score.py"
 
   - name: "classify-unlabeled-data"
     help: |
@@ -237,13 +237,13 @@ commands:
       ```
 
       Explanation:
-      - The script `thirdStep-label.py` loads the trained spaCy model from the specified model directory (`./my_trained_model` by default).
+      - The script `thirdStep-label.py` loads the trained spaCy model from the specified model directory (`./output` by default).
       - It reads the unlabeled data from the file specified in the `unlabeled_data_file` variable (`data/train.jsonl` by default).
       - Each record in the unlabeled data is classified using the loaded model.
       - The predicted labels for each record are extracted and stored along with the text.
       - The classified data is optionally saved to a file specified in the `output_file` variable (`data/thirdStep_file.jsonl` by default).
     script:
-      - "python3 python_Code/thirdStep-label.py"
+      - "python3 scripts/thirdStep-label.py"
 
   - name: "format-labeled-data"
     help: |
@@ -260,7 +260,7 @@ commands:
       - It constructs an output record containing the text, predicted labels, accepted categories, answer (accept/reject), and options with meta information.
       - The transformed data is written to the file specified in the `output_file` variable (`data/train4465.jsonl` by default).
     script:
-      - "python3 python_Code/finalStep-formatLabel.py"
+      - "python3 scripts/finalStep-formatLabel.py"
       
   - name: "setup-environment"
     help: |
