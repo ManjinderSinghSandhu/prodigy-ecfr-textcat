@@ -178,7 +178,6 @@ workflows:
     - train-text-classification-model
     - classify-unlabeled-data
     - format-labeled-data
-  all:
     # - review-evaluation-data
     # - export-reviewed-evaluation-data
     # - import-training-data
