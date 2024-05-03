@@ -55,12 +55,10 @@ assets:
     description: "Python script for labeling data in the third step"
   - dest: "python_Code/train_eval_split.ipynb"
     description: "Jupyter notebook for training and evaluation data splitting"
-  - dest: "TerminalCode.txt"
-    description: "Text file containing terminal code"
+  - dest: "data/firstStep_file.jsonl"
+    description: "Python script for evaluating the trained model"
   - dest: "README.md"
     description: "Markdown file containing project documentation"
-  - dest: "prodigy.json"
-    description: "JSON file containing Prodigy configuration"
 
 workflows:
   train:
