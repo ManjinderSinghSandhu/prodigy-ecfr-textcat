@@ -1,5 +1,10 @@
 import jsonlines
+import spacy
 from sklearn.metrics import classification_report, accuracy_score, f1_score, precision_score, recall_score
+
+# Load the trained spaCy model
+model_path = "./my_trained_model"
+nlp = spacy.load(model_path)
 
 # Load the golden evaluation data
 golden_eval_data = []
