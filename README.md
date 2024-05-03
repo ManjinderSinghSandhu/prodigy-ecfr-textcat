@@ -35,7 +35,7 @@ Follow these step-by-step instructions to install and configure the project:
 git clone <https://github.com/ManjinderUNCC/prodigy-ecfr-textcat.git>
 ```
 
-2. Next, you need to have a Prodigy license key. Install Prodigy first:
+2. Next, you need to have a Prodigy license key. Install Prodigy first: (But it's not required)
 
 ```bash
 python -m pip install prodigy==1.15.2 --extra-index-url https://$PRODIGY_KEY@download.prodi.gy
