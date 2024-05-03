@@ -176,9 +176,9 @@ workflows:
   train:
     - preprocess
     - train-text-classification-model
-  all:
     - classify-unlabeled-data
     - format-labeled-data
+  all:
     - review-evaluation-data
     - export-reviewed-evaluation-data
     - import-training-data
@@ -195,7 +195,7 @@ commands:
       
       Usage:
       ```
-      spacy project run format-script
+      spacy project run preprocess
       ```
 
       Explanation:
