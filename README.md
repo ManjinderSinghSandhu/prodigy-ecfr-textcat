@@ -61,7 +61,6 @@ To use the project, follow these steps:
 Describe the organization of files and directories within the project.
 
 - `/data`
-  - `eval.jsonl`
   - `five_examples_annotated5.jsonl`
   - `goldenEval.jsonl`
   - `train.jsonl`
