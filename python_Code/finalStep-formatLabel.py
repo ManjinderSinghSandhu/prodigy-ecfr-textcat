@@ -4,7 +4,7 @@ import jsonlines
 input_file = "data/thirdStep_file.jsonl"
 
 # Output file to store transformed data
-output_file = "data/train4465.jsonl"
+output_file = "data/Full-Labeled-Data-Final-4465.jsonl"
 
 # Threshold for considering a label
 threshold = 0.5
