@@ -48,5 +48,5 @@ for i in range(n_iter):
     print("Iteration:", i, "Losses:", losses)
 
 # Save the trained model
-output_dir = "./spaCy_trained_model"
+output_dir = "./my_trained_model"
 nlp.to_disk(output_dir)
