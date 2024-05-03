@@ -196,7 +196,7 @@ commands:
       
       Usage:
       ```
-      spacy project run execute-first-step-format-script
+      spacy project run format-script
       ```
 
       Explanation:
