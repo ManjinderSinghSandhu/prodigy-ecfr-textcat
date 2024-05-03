@@ -1,45 +1,43 @@
+# Import necessary libraries
 import gradio as gr
-import jsonlines
 import spacy
 
 # Load the trained spaCy model
 model_path = "./my_trained_model"
 nlp = spacy.load(model_path)
 
-# Load golden evaluation data
-golden_eval_data = []
-with jsonlines.open("data/goldenEval.jsonl") as f:
-    for line in f:
-        golden_eval_data.append(line)
+# Function to classify text
+def classify_text(text):
+    doc = nlp(text)
+    predicted_labels = doc.cats
+    return predicted_labels
 
-# Function to evaluate text input
-def evaluate_text(input_text):
-    doc = nlp(input_text)
-    # Perform evaluation logic here based on golden_eval_data and the model
-    evaluation_result = "Evaluation result based on text input"  # Placeholder, adjust as needed
-    return evaluation_result
+# Function to save results to a file
+def save_to_file(text, predicted_labels):
+    with open("classification_results.txt", "w") as f:
+        f.write("Text: {}\n\n".format(text))
+        for label, score in predicted_labels.items():
+            f.write("{}: {}\n".format(label, score))
 
-# Function to evaluate file upload
-def evaluate_file(upload):
-    file_contents = upload.read().decode("utf-8")
-    doc = nlp(file_contents)
-    # Perform evaluation logic here based on golden_eval_data and the model
-    evaluation_result = "Evaluation result based on uploaded file"  # Placeholder, adjust as needed
-    return evaluation_result
+# Gradio Interface
+inputs = [
+    gr.inputs.Textbox(lines=7, label="Enter your text"),
+    gr.inputs.File(label="Upload a file")
+]
 
-# Create Gradio interface
-text_input = gr.inputs.Textbox(lines=10, label="Input Text")
-file_upload = gr.inputs.File(label="Upload File")
-output_text = gr.outputs.Textbox(label="Evaluation Output")
+output = gr.outputs.Textbox(label="Classification Results")
 
-# Define Gradio interface
-interface = gr.Interface(
-    fn=[evaluate_text, evaluate_file],
-    inputs=[text_input, file_upload],
-    outputs=output_text,
-    title="spaCy Model Evaluator",
-    description="Enter text or upload a file to evaluate using the trained spaCy model."
-)
+def classify_and_save(input_text, input_file):
+    if input_text:
+        text = input_text
+    elif input_file:
+        # Process the file and extract text
+        with open(input_file.name, "r") as f:
+            text = f.read()
+    
+    predicted_labels = classify_text(text)
+    save_to_file(text, predicted_labels)
+    return predicted_labels
 
-# Additional option to view evaluation print and download files
-interface.launch(share=True)  # Launch the interface with the option to share
+iface = gr.Interface(fn=classify_and_save, inputs=inputs, outputs=output, title="Text Classifier")
+iface.launch(share=True)
