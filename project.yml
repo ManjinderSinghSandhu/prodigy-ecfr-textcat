@@ -148,6 +148,22 @@ commands:
     script:
       - "python3 python_Code/finalStep-formatLabel.py"
       
+  - name: "evaluate-model"
+    help: |
+      Evaluate the trained model using the evaluation data and print the metrics.
+
+      Usage:
+      ```
+      spacy project run evaluate-model
+      ```
+
+      Explanation:
+      - The script `evaluate_model.py` loads the trained model and evaluates it using the golden evaluation data.
+      - It calculates evaluation metrics such as accuracy, precision, recall, and F1-score.
+      - The metrics are printed to the console.
+    script:
+      - "python python_Code/evaluate_model.py"
+      
   # - name: "review-evaluation-data"
   #   help: |
   #     Review the evaluation data in Prodigy and automatically accept annotations.
