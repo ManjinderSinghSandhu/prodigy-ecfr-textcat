@@ -74,6 +74,8 @@ workflows:
     # - import-golden-evaluation-data
     # - train-model-experiment1
     # - convert-data-to-spacy-format
+  evaluate:
+    - evaluate-model
 
 commands:
   - name: "preprocess"
