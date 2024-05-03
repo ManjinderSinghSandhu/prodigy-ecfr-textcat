@@ -2,7 +2,7 @@ import spacy
 import jsonlines
 
 # Load the trained model
-model_path = "./my_trained_model"
+model_path = "./spaCy_trained_model"
 nlp = spacy.load(model_path)
 
 # Load the unlabeled data
