@@ -1,4 +1,3 @@
-
 # Title and description of the project
 title: "Citations of ECFR Banking Regulation in a spaCy pipeline."
 description: "Custom text classification project for spaCy v3 adapted from the spaCy v3"
@@ -179,7 +178,6 @@ workflows:
     - train-text-classification-model
     - classify-unlabeled-data
     - format-labeled-data
-    - setup-environment
     - review-evaluation-data
     - export-reviewed-evaluation-data
     - import-training-data
@@ -261,13 +259,6 @@ commands:
       - The transformed data is written to the file specified in the `output_file` variable (`data/train4465.jsonl` by default).
     script:
       - "python3 python_Code/finalStep-formatLabel.py"
-      
-  - name: "setup-environment"
-    help: |
-      Set up the Python virtual environment.
-    script:
-      - "python3 -m virtualenv venv"
-      - "source venv/bin/activate"
       
   - name: "review-evaluation-data"
     help: |
