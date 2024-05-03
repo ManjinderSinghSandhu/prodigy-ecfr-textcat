@@ -179,7 +179,6 @@ workflows:
     - train-text-classification-model
     - classify-unlabeled-data
     - format-labeled-data
-    - train-custom-model
   all:
     # - review-evaluation-data
     # - export-reviewed-evaluation-data
@@ -373,19 +372,19 @@ commands:
   #   script:
   #     - "python3 -m prodigy data-to-spacy --textcat-multilabel prodigy3train,eval:golden3 ./corpus --base-model en_core_web_lg"
 
-  - name: "train-custom-model"
-    help: |
-      Train a custom text classification model using spaCy with the converted data in spaCy format.
+  # - name: "train-custom-model"
+  #   help: |
+  #     Train a custom text classification model using spaCy with the converted data in spaCy format.
       
-      Usage:
-      ```
-      spacy project run train-custom-model
-      ```
+  #     Usage:
+  #     ```
+  #     spacy project run train-custom-model
+  #     ```
 
-      Explanation:
-      - The command trains a custom text classification model using spaCy.
-      - It uses the converted data in spaCy format located in the './corpus' directory.
-      - The model is trained using the configuration defined in 'corpus/config.cfg'.
-    script:
-      - "python -m spacy train corpus/config.cfg --paths.train corpus/train.spacy --paths.dev corpus/dev.spacy"
+  #     Explanation:
+  #     - The command trains a custom text classification model using spaCy.
+  #     - It uses the converted data in spaCy format located in the './corpus' directory.
+  #     - The model is trained using the configuration defined in 'corpus/config.cfg'.
+  #   script:
+  #     - "python -m spacy train corpus/config.cfg --paths.train corpus/train.spacy --paths.dev corpus/dev.spacy"
 
