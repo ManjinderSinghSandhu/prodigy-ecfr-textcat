@@ -174,7 +174,6 @@ assets:
 
 workflows:
   train:
-    - download-model
     - preprocess
     - train-text-classification-model
     - classify-unlabeled-data
