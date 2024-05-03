@@ -41,8 +41,6 @@ git clone <https://github.com/ManjinderUNCC/prodigy-ecfr-textcat.git>
 python -m pip install prodigy==1.15.2 --extra-index-url https://$PRODIGY_KEY@download.prodi.gy
 ```
 
-You need to pin `prodigy` or else the `requirements.txt` (which is strict) will not find a matching distribution.
-
 This assumes you previously set up your `PRODIGY_KEY` as an environmental variable like:
 
 ```bash
