@@ -174,19 +174,19 @@ assets:
 
 workflows:
   train:
+    - download-model
     - preprocess
     - train-text-classification-model
     - classify-unlabeled-data
     - format-labeled-data
-  all:
-    - review-evaluation-data
-    - export-reviewed-evaluation-data
-    - import-training-data
-    - import-golden-evaluation-data
-    - train-model-experiment1
-    - download-model
-    - convert-data-to-spacy-format
     - train-custom-model
+  all:
+    # - review-evaluation-data
+    # - export-reviewed-evaluation-data
+    # - import-training-data
+    # - import-golden-evaluation-data
+    # - train-model-experiment1
+    # - convert-data-to-spacy-format
 
 commands:
   - name: "preprocess"
@@ -261,86 +261,86 @@ commands:
     script:
       - "python3 python_Code/finalStep-formatLabel.py"
       
-  - name: "review-evaluation-data"
-    help: |
-      Review the evaluation data in Prodigy and automatically accept annotations.
+  # - name: "review-evaluation-data"
+  #   help: |
+  #     Review the evaluation data in Prodigy and automatically accept annotations.
       
-      Usage:
-      ```
-      spacy project run review-evaluation-data
-      ```
+  #     Usage:
+  #     ```
+  #     spacy project run review-evaluation-data
+  #     ```
 
-      Explanation:
-      - The command reviews the evaluation data in Prodigy.
-      - It automatically accepts annotations made during the review process.
-      - Only sessions allowed by the environment variable PRODIGY_ALLOWED_SESSIONS are permitted to review data. In this case, the session 'reviwer' is allowed.
-    script:
-      - "PRODIGY_ALLOWED_SESSIONS=reviwer python3 -m prodigy review project3eval-review project3eval --auto-accept"
+  #     Explanation:
+  #     - The command reviews the evaluation data in Prodigy.
+  #     - It automatically accepts annotations made during the review process.
+  #     - Only sessions allowed by the environment variable PRODIGY_ALLOWED_SESSIONS are permitted to review data. In this case, the session 'reviwer' is allowed.
+  #   script:
+  #     - "PRODIGY_ALLOWED_SESSIONS=reviwer python3 -m prodigy review project3eval-review project3eval --auto-accept"
 
-  - name: "export-reviewed-evaluation-data"
-    help: |
-      Export the reviewed evaluation data from Prodigy to a JSONL file named 'goldenEval.jsonl'.
+  # - name: "export-reviewed-evaluation-data"
+  #   help: |
+  #     Export the reviewed evaluation data from Prodigy to a JSONL file named 'goldenEval.jsonl'.
       
-      Usage:
-      ```
-      spacy project run export-reviewed-evaluation-data
-      ```
+  #     Usage:
+  #     ```
+  #     spacy project run export-reviewed-evaluation-data
+  #     ```
 
-      Explanation:
-      - The command exports the reviewed evaluation data from Prodigy to a JSONL file.
-      - The data is exported from the Prodigy database associated with the project named 'project3eval-review'.
-      - The exported data is saved to the file 'goldenEval.jsonl'.
-      - This command helps in preserving the reviewed annotations for further analysis or processing.
-    script:
-      - "prodigy db-out project3eval-review > goldenEval.jsonl"
+  #     Explanation:
+  #     - The command exports the reviewed evaluation data from Prodigy to a JSONL file.
+  #     - The data is exported from the Prodigy database associated with the project named 'project3eval-review'.
+  #     - The exported data is saved to the file 'goldenEval.jsonl'.
+  #     - This command helps in preserving the reviewed annotations for further analysis or processing.
+  #   script:
+  #     - "prodigy db-out project3eval-review > goldenEval.jsonl"
 
-  - name: "import-training-data"
-    help: |
-      Import the training data into Prodigy from a JSONL file named 'train200.jsonl'.
+  # - name: "import-training-data"
+  #   help: |
+  #     Import the training data into Prodigy from a JSONL file named 'train200.jsonl'.
       
-      Usage:
-      ```
-      spacy project run import-training-data
-      ```
+  #     Usage:
+  #     ```
+  #     spacy project run import-training-data
+  #     ```
 
-      Explanation:
-      - The command imports the training data into Prodigy from the specified JSONL file.
-      - The data is imported into the Prodigy database associated with the project named 'prodigy3train'.
-      - This command prepares the training data for annotation and model training in Prodigy.
-    script:
-      - "prodigy db-in prodigy3train train200.jsonl"
+  #     Explanation:
+  #     - The command imports the training data into Prodigy from the specified JSONL file.
+  #     - The data is imported into the Prodigy database associated with the project named 'prodigy3train'.
+  #     - This command prepares the training data for annotation and model training in Prodigy.
+  #   script:
+  #     - "prodigy db-in prodigy3train train200.jsonl"
 
-  - name: "import-golden-evaluation-data"
-    help: |
-      Import the golden evaluation data into Prodigy from a JSONL file named 'goldeneval.jsonl'.
+  # - name: "import-golden-evaluation-data"
+  #   help: |
+  #     Import the golden evaluation data into Prodigy from a JSONL file named 'goldeneval.jsonl'.
       
-      Usage:
-      ```
-      spacy project run import-golden-evaluation-data
-      ```
+  #     Usage:
+  #     ```
+  #     spacy project run import-golden-evaluation-data
+  #     ```
 
-      Explanation:
-      - The command imports the golden evaluation data into Prodigy from the specified JSONL file.
-      - The data is imported into the Prodigy database associated with the project named 'golden3'.
-      - This command prepares the golden evaluation data for further analysis and model evaluation in Prodigy.
-    script:
-      - "prodigy db-in golden3 goldeneval.jsonl"
+  #     Explanation:
+  #     - The command imports the golden evaluation data into Prodigy from the specified JSONL file.
+  #     - The data is imported into the Prodigy database associated with the project named 'golden3'.
+  #     - This command prepares the golden evaluation data for further analysis and model evaluation in Prodigy.
+  #   script:
+  #     - "prodigy db-in golden3 goldeneval.jsonl"
 
-  - name: "train-model-experiment1"
-    help: |
-      Train a text classification model using Prodigy with the 'prodigy3train' dataset and evaluating on 'golden3'.
+  # - name: "train-model-experiment1"
+  #   help: |
+  #     Train a text classification model using Prodigy with the 'prodigy3train' dataset and evaluating on 'golden3'.
       
-      Usage:
-      ```
-      spacy project run train-model-experiment1
-      ```
+  #     Usage:
+  #     ```
+  #     spacy project run train-model-experiment1
+  #     ```
 
-      Explanation:
-      - The command trains a text classification model using Prodigy.
-      - It uses the 'prodigy3train' dataset for training and evaluates the model on the 'golden3' dataset.
-      - The trained model is saved to the './output/experiment1' directory.
-    script:
-      - "python3 -m prodigy train --textcat-multilabel prodigy3train,eval:golden3 ./output/experiment1"
+  #     Explanation:
+  #     - The command trains a text classification model using Prodigy.
+  #     - It uses the 'prodigy3train' dataset for training and evaluates the model on the 'golden3' dataset.
+  #     - The trained model is saved to the './output/experiment1' directory.
+  #   script:
+  #     - "python3 -m prodigy train --textcat-multilabel prodigy3train,eval:golden3 ./output/experiment1"
 
   - name: "download-model"
     help: |
@@ -357,21 +357,21 @@ commands:
     script:
       - "python3 -m spacy download en_core_web_lg"
 
-  - name: "convert-data-to-spacy-format"
-    help: |
-      Convert the annotated data from Prodigy to spaCy format using the 'prodigy3train' and 'golden3' datasets.
+  # - name: "convert-data-to-spacy-format"
+  #   help: |
+  #     Convert the annotated data from Prodigy to spaCy format using the 'prodigy3train' and 'golden3' datasets.
       
-      Usage:
-      ```
-      spacy project run convert-data-to-spacy-format
-      ```
+  #     Usage:
+  #     ```
+  #     spacy project run convert-data-to-spacy-format
+  #     ```
 
-      Explanation:
-      - The command converts the annotated data from Prodigy to spaCy format.
-      - It uses the 'prodigy3train' and 'golden3' datasets for conversion.
-      - The converted data is saved to the './corpus' directory with the base model 'en_core_web_lg'.
-    script:
-      - "python3 -m prodigy data-to-spacy --textcat-multilabel prodigy3train,eval:golden3 ./corpus --base-model en_core_web_lg"
+  #     Explanation:
+  #     - The command converts the annotated data from Prodigy to spaCy format.
+  #     - It uses the 'prodigy3train' and 'golden3' datasets for conversion.
+  #     - The converted data is saved to the './corpus' directory with the base model 'en_core_web_lg'.
+  #   script:
+  #     - "python3 -m prodigy data-to-spacy --textcat-multilabel prodigy3train,eval:golden3 ./corpus --base-model en_core_web_lg"
 
   - name: "train-custom-model"
     help: |
