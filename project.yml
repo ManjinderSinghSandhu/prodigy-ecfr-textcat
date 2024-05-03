@@ -340,20 +340,20 @@ commands:
   #   script:
   #     - "python3 -m prodigy train --textcat-multilabel prodigy3train,eval:golden3 ./output/experiment1"
 
-  - name: "download-model"
-    help: |
-      Download the English language model 'en_core_web_lg' from spaCy.
+  # - name: "download-model"
+  #   help: |
+  #     Download the English language model 'en_core_web_lg' from spaCy.
       
-      Usage:
-      ```
-      spacy project run download-model
-      ```
+  #     Usage:
+  #     ```
+  #     spacy project run download-model
+  #     ```
 
-      Explanation:
-      - The command downloads the English language model 'en_core_web_lg' from spaCy.
-      - This model is used as the base model for further data processing and training in the project.
-    script:
-      - "python3 -m spacy download en_core_web_lg"
+  #     Explanation:
+  #     - The command downloads the English language model 'en_core_web_lg' from spaCy.
+  #     - This model is used as the base model for further data processing and training in the project.
+  #   script:
+  #     - "python3 -m spacy download en_core_web_lg"
 
   # - name: "convert-data-to-spacy-format"
   #   help: |
