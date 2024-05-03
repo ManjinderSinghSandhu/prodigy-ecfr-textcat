@@ -35,7 +35,13 @@ Follow these step-by-step instructions to install and configure the project:
 git clone <https://github.com/ManjinderUNCC/prodigy-ecfr-textcat.git>
 ```
 
-2. Next, you need to have a Prodigy license key. Install Prodigy first: (But it's not required)
+2. Install the required dependencies by running:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Next, you need to have a Prodigy license key to use Prodigy. (But it's not required) Install Prodigy first:
 
 ```bash
 python -m pip install prodigy==1.15.2 --extra-index-url https://$PRODIGY_KEY@download.prodi.gy
@@ -45,16 +51,6 @@ This assumes you previously set up your `PRODIGY_KEY` as an environmental variab
 
 ```bash
 export PRODIGY_KEY=1111-1111-1111-1111
-```
-
-3. Install the required dependencies by running:
-
-```bash
-pip install -r requirements.txt
-```
-
-```bash
-pip install -r requirements-dev.txt
 ```
 
 ## Usage
