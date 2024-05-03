@@ -173,9 +173,10 @@ assets:
     description: "JSON file containing Prodigy configuration"
 
 workflows:
-  all:
-    - format-script
+  train:
+    - preprocess
     - train-text-classification-model
+  all:
     - classify-unlabeled-data
     - format-labeled-data
     - review-evaluation-data
@@ -188,7 +189,7 @@ workflows:
     - train-custom-model
 
 commands:
-  - name: "format-script"
+  - name: "preprocess"
     help: |
       Execute the Python script `firstStep-format.py`, which performs the initial formatting of a dataset file for the first step of the project. This script extracts text and labels from a dataset file in JSONL format and writes them to a new JSONL file in a specific format.
       
