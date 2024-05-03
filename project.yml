@@ -1,0 +1,280 @@
+# Title and description of the project
+title: "Citations of ECFR Banking Regulation in a spaCy pipeline."
+description: "Custom text classification project for spaCy v3 adapted from the spaCy v3"
+
+vars:
+  lang: "en"
+  train: corpus/train.spacy
+  dev: corpus/dev.spacy
+  version: "0.1.0"
+  gpu_id: -1
+  vectors_model: "en_core_web_lg"
+  name: ecfr_ner
+  prodigy:
+    ner_labels: ecfr_initial_ner
+    ner_manual_labels: ecfr_manual_ner
+    senter_labels: ecfr_labeled_sents
+    ner_labeled_dataset: ecfr_labeled_ner
+  assets:
+    ner_labels: assets/ecfr_ner_labels.jsonl
+    senter_labels: assets/ecfr_senter_labels.jsonl
+    ner_patterns: assets/patterns.jsonl
+    corpus_labels: corpus/labels
+    data_files: data
+    trained_model: my_trained_model
+    trained_model_textcat: my_trained_model/textcat_multilabel
+    output_models: output
+    python_code: python_Code
+
+directories: [ "data", "python_Code"]
+
+assets:
+  - dest: "data/eval.jsonl"
+    description: "JSONL file containing evaluation data"
+  - dest: "data/firstStep_file.jsonl"
+    description: "JSONL file containing formatted data from the first step"
+  - dest: "data/five_examples_annotated5.jsonl"
+    description: "JSONL file containing five annotated examples"
+  - dest: "data/goldenEval.jsonl"
+    description: "JSONL file containing golden evaluation data"
+  - dest: "data/thirdStep_file.jsonl"
+    description: "JSONL file containing classified data from the third step"
+  - dest: "data/train.jsonl"
+    description: "JSONL file containing training data"
+  - dest: "data/train200.jsonl"
+    description: "JSONL file containing initial training data"
+  - dest: "data/train4465.jsonl"
+    description: "JSONL file containing formatted and labeled training data"
+  - dest: "python_Code/finalStep-formatLabel.py"
+    description: "Python script for formatting labeled data in the final step"
+  - dest: "python_Code/firstStep-format.py"
+    description: "Python script for formatting data in the first step"
+  - dest: "python_Code/five_examples_annotated.ipynb"
+    description: "Jupyter notebook containing five annotated examples"
+  - dest: "python_Code/secondStep-score.py"
+    description: "Python script for scoring data in the second step"
+  - dest: "python_Code/thirdStep-label.py"
+    description: "Python script for labeling data in the third step"
+  - dest: "python_Code/train_eval_split.ipynb"
+    description: "Jupyter notebook for training and evaluation data splitting"
+  - dest: "TerminalCode.txt"
+    description: "Text file containing terminal code"
+  - dest: "README.md"
+    description: "Markdown file containing project documentation"
+  - dest: "prodigy.json"
+    description: "JSON file containing Prodigy configuration"
+
+workflows:
+  train:
+    - preprocess
+    - train-text-classification-model
+    - classify-unlabeled-data
+    - format-labeled-data
+    # - review-evaluation-data
+    # - export-reviewed-evaluation-data
+    # - import-training-data
+    # - import-golden-evaluation-data
+    # - train-model-experiment1
+    # - convert-data-to-spacy-format
+
+commands:
+  - name: "preprocess"
+    help: |
+      Execute the Python script `firstStep-format.py`, which performs the initial formatting of a dataset file for the first step of the project. This script extracts text and labels from a dataset file in JSONL format and writes them to a new JSONL file in a specific format.
+      
+      Usage:
+      ```
+      spacy project run preprocess
+      ```
+
+      Explanation:
+      - The script `firstStep-format.py` reads data from the file specified in the `dataset_file` variable (`data/train200.jsonl` by default).
+      - It extracts text and labels from each JSON object in the dataset file.
+      - If both text and at least one label are available, it writes a new JSON object to the output file specified in the `output_file` variable (`data/firstStep_file.jsonl` by default) with the extracted text and label.
+      - If either text or label is missing in a JSON object, a warning message is printed.
+      - Upon completion, the script prints a message confirming the processing and the path to the output file.
+    script:
+      - "python3 python_Code/firstStep-format.py"
+
+  - name: "train-text-classification-model"
+    help: |
+      Train the text classification model for the second step of the project using the `secondStep-score.py` script. This script loads a blank English spaCy model and adds a text classification pipeline to it. It then trains the model using the processed data from the first step.
+      
+      Usage:
+      ```
+      spacy project run train-text-classification-model
+      ```
+
+      Explanation:
+      - The script `secondStep-score.py` loads a blank English spaCy model and adds a text classification pipeline to it.
+      - It reads processed data from the file specified in the `processed_data_file` variable (`data/firstStep_file.jsonl` by default).
+      - The processed data is converted to spaCy format for training the model.
+      - The model is trained using the converted data for a specified number of iterations (`n_iter`).
+      - Losses are printed for each iteration during training.
+      - Upon completion, the trained model is saved to the specified output directory (`./my_trained_model` by default).
+    script:
+      - "python3 python_Code/secondStep-score.py"
+
+  - name: "classify-unlabeled-data"
+    help: |
+      Classify the unlabeled data for the third step of the project using the `thirdStep-label.py` script. This script loads the trained spaCy model from the previous step and classifies each record in the unlabeled dataset.
+      
+      Usage:
+      ```
+      spacy project run classify-unlabeled-data
+      ```
+
+      Explanation:
+      - The script `thirdStep-label.py` loads the trained spaCy model from the specified model directory (`./my_trained_model` by default).
+      - It reads the unlabeled data from the file specified in the `unlabeled_data_file` variable (`data/train.jsonl` by default).
+      - Each record in the unlabeled data is classified using the loaded model.
+      - The predicted labels for each record are extracted and stored along with the text.
+      - The classified data is optionally saved to a file specified in the `output_file` variable (`data/thirdStep_file.jsonl` by default).
+    script:
+      - "python3 python_Code/thirdStep-label.py"
+
+  - name: "format-labeled-data"
+    help: |
+      Format the labeled data for the final step of the project using the `finalStep-formatLabel.py` script. This script processes the classified data from the third step and transforms it into a specific format, considering a threshold for label acceptance.
+      
+      Usage:
+      ```
+      spacy project run format-labeled-data
+      ```
+
+      Explanation:
+      - The script `finalStep-formatLabel.py` reads classified data from the file specified in the `input_file` variable (`data/thirdStep_file.jsonl` by default).
+      - For each record, it determines accepted categories based on a specified threshold.
+      - It constructs an output record containing the text, predicted labels, accepted categories, answer (accept/reject), and options with meta information.
+      - The transformed data is written to the file specified in the `output_file` variable (`data/train4465.jsonl` by default).
+    script:
+      - "python3 python_Code/finalStep-formatLabel.py"
+      
+  # - name: "review-evaluation-data"
+  #   help: |
+  #     Review the evaluation data in Prodigy and automatically accept annotations.
+      
+  #     Usage:
+  #     ```
+  #     spacy project run review-evaluation-data
+  #     ```
+
+  #     Explanation:
+  #     - The command reviews the evaluation data in Prodigy.
+  #     - It automatically accepts annotations made during the review process.
+  #     - Only sessions allowed by the environment variable PRODIGY_ALLOWED_SESSIONS are permitted to review data. In this case, the session 'reviwer' is allowed.
+  #   script:
+  #     - "PRODIGY_ALLOWED_SESSIONS=reviwer python3 -m prodigy review project3eval-review project3eval --auto-accept"
+
+  # - name: "export-reviewed-evaluation-data"
+  #   help: |
+  #     Export the reviewed evaluation data from Prodigy to a JSONL file named 'goldenEval.jsonl'.
+      
+  #     Usage:
+  #     ```
+  #     spacy project run export-reviewed-evaluation-data
+  #     ```
+
+  #     Explanation:
+  #     - The command exports the reviewed evaluation data from Prodigy to a JSONL file.
+  #     - The data is exported from the Prodigy database associated with the project named 'project3eval-review'.
+  #     - The exported data is saved to the file 'goldenEval.jsonl'.
+  #     - This command helps in preserving the reviewed annotations for further analysis or processing.
+  #   script:
+  #     - "prodigy db-out project3eval-review > goldenEval.jsonl"
+
+  # - name: "import-training-data"
+  #   help: |
+  #     Import the training data into Prodigy from a JSONL file named 'train200.jsonl'.
+      
+  #     Usage:
+  #     ```
+  #     spacy project run import-training-data
+  #     ```
+
+  #     Explanation:
+  #     - The command imports the training data into Prodigy from the specified JSONL file.
+  #     - The data is imported into the Prodigy database associated with the project named 'prodigy3train'.
+  #     - This command prepares the training data for annotation and model training in Prodigy.
+  #   script:
+  #     - "prodigy db-in prodigy3train train200.jsonl"
+
+  # - name: "import-golden-evaluation-data"
+  #   help: |
+  #     Import the golden evaluation data into Prodigy from a JSONL file named 'goldeneval.jsonl'.
+      
+  #     Usage:
+  #     ```
+  #     spacy project run import-golden-evaluation-data
+  #     ```
+
+  #     Explanation:
+  #     - The command imports the golden evaluation data into Prodigy from the specified JSONL file.
+  #     - The data is imported into the Prodigy database associated with the project named 'golden3'.
+  #     - This command prepares the golden evaluation data for further analysis and model evaluation in Prodigy.
+  #   script:
+  #     - "prodigy db-in golden3 goldeneval.jsonl"
+
+  # - name: "train-model-experiment1"
+  #   help: |
+  #     Train a text classification model using Prodigy with the 'prodigy3train' dataset and evaluating on 'golden3'.
+      
+  #     Usage:
+  #     ```
+  #     spacy project run train-model-experiment1
+  #     ```
+
+  #     Explanation:
+  #     - The command trains a text classification model using Prodigy.
+  #     - It uses the 'prodigy3train' dataset for training and evaluates the model on the 'golden3' dataset.
+  #     - The trained model is saved to the './output/experiment1' directory.
+  #   script:
+  #     - "python3 -m prodigy train --textcat-multilabel prodigy3train,eval:golden3 ./output/experiment1"
+
+  # - name: "download-model"
+  #   help: |
+  #     Download the English language model 'en_core_web_lg' from spaCy.
+      
+  #     Usage:
+  #     ```
+  #     spacy project run download-model
+  #     ```
+
+  #     Explanation:
+  #     - The command downloads the English language model 'en_core_web_lg' from spaCy.
+  #     - This model is used as the base model for further data processing and training in the project.
+  #   script:
+  #     - "python3 -m spacy download en_core_web_lg"
+
+  # - name: "convert-data-to-spacy-format"
+  #   help: |
+  #     Convert the annotated data from Prodigy to spaCy format using the 'prodigy3train' and 'golden3' datasets.
+      
+  #     Usage:
+  #     ```
+  #     spacy project run convert-data-to-spacy-format
+  #     ```
+
+  #     Explanation:
+  #     - The command converts the annotated data from Prodigy to spaCy format.
+  #     - It uses the 'prodigy3train' and 'golden3' datasets for conversion.
+  #     - The converted data is saved to the './corpus' directory with the base model 'en_core_web_lg'.
+  #   script:
+  #     - "python3 -m prodigy data-to-spacy --textcat-multilabel prodigy3train,eval:golden3 ./corpus --base-model en_core_web_lg"
+
+  # - name: "train-custom-model"
+  #   help: |
+  #     Train a custom text classification model using spaCy with the converted data in spaCy format.
+      
+  #     Usage:
+  #     ```
+  #     spacy project run train-custom-model
+  #     ```
+
+  #     Explanation:
+  #     - The command trains a custom text classification model using spaCy.
+  #     - It uses the converted data in spaCy format located in the './corpus' directory.
+  #     - The model is trained using the configuration defined in 'corpus/config.cfg'.
+  #   script:
+  #     - "python -m spacy train corpus/config.cfg --paths.train corpus/train.spacy --paths.dev corpus/dev.spacy"
+
