@@ -62,13 +62,9 @@ Describe the organization of files and directories within the project.
 
 - `/data`
   - `eval.jsonl`
-  - `firstStep_file.jsonl`
   - `five_examples_annotated5.jsonl`
   - `goldenEval.jsonl`
-  - `thirdStep_file.jsonl`
   - `train.jsonl`
-  - `train200.jsonl`
-  - `train4465.jsonl`
 - `/python_Code`
   - `finalStep-formatLabel.py`
   - `firstStep-format.py`
@@ -77,6 +73,7 @@ Describe the organization of files and directories within the project.
   - `thirdStep-label.py`
   - `train_eval_split.ipynb`
 - `requirements.txt`
+- `requirements-dev.txt`
 - `Project.yml`
 - `README.md`
 
