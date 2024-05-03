@@ -29,8 +29,6 @@ vars:
 directories: [ "data", "python_Code"]
 
 assets:
-  - dest: "data/eval.jsonl"
-    description: "JSONL file containing evaluation data"
   - dest: "data/firstStep_file.jsonl"
     description: "JSONL file containing formatted data from the first step"
   - dest: "data/five_examples_annotated5.jsonl"
