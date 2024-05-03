@@ -53,9 +53,11 @@ export PRODIGY_KEY=1111-1111-1111-1111
 
 ```bash
 pip install -r requirements.txt
+```
 
 ```bash
 pip install -r requirements-dev.txt
+```
 
 ## Usage
 
