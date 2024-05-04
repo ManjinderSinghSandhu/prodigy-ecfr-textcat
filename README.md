@@ -94,8 +94,5 @@ Describe the organization of files and directories within the project.
 
 - Package A: MIT License
 - Package B: Apache License 2.0
-
-## Acknowledgements
-
-Manjinder Sandhu, Dagim Bantikassegn, Alex Brooks, Tyler Dabbs
+- Prodigy 
 
