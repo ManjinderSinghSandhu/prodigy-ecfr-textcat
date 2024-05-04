@@ -73,6 +73,7 @@ workflows:
     # - train-model-experiment1
     # - convert-data-to-spacy-format
   evaluate:
+    - set-threshold
     - evaluate-model
 
 commands:
@@ -163,6 +164,21 @@ commands:
       - The metrics are printed to the console.
     script:
       - "python python_Code/evaluate_model.py"
+
+  - name: "set-threshold"
+    help: |
+      Set the threshold for text categorization in a trained model.
+
+      Usage:
+      ```
+      spacy project run set-threshold <model_path> <threshold>
+      ```
+
+      Explanation:
+      - The script loads the trained model from the specified path.
+      - It sets the threshold for text categorization to the specified value.
+    script:
+      - "python python_Code/threshold.py"
       
   # - name: "review-evaluation-data"
   #   help: |
