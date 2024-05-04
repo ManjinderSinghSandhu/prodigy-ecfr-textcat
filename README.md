@@ -1,5 +1,7 @@
 # prodigy-ecfr-textcat
 
+https://huggingface.co/spaces/ManjinderUNCC/prodigy-ecfr-textcat
+
 ## About the Project
 
 Our goal is to organize these financial institution rules and regulations so financial institutions  can go through newly created rules and regulations to know which departments to send the information to and to allow easy retrieval of these regulations when necessary. Text mining and information retrieval will allow a large step of the process to be automated. Automating these steps will allow less time and effort to be contributed for financial institutions employees. This allows more time and work to be used to accomplish other projects.
