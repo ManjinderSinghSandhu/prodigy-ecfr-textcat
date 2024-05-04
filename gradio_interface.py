@@ -6,6 +6,9 @@ from sklearn.metrics import classification_report, accuracy_score, f1_score, pre
 model_path = "./my_trained_model"
 nlp = spacy.load(model_path)
 
+# Threshold for classification
+threshold = 0.21
+
 # Function to classify text
 def classify_text(text):
     doc = nlp(text)
@@ -14,8 +17,9 @@ def classify_text(text):
 
 # Function to evaluate the predicted labels for the input text
 def evaluate_text(input_text):
-    # Get the predicted labels for the input text
-    predicted_labels = classify_text(input_text)
+    # Get the predicted labels and probabilities for the input text
+    doc = nlp(input_text)
+    predicted_labels = doc.cats
     
     # Assuming you have ground truth labels for the input text, you would compare the predicted labels with the ground truth labels here.
     # For demonstration purposes, let's assume the ground truth labels are provided here.
@@ -28,17 +32,17 @@ def evaluate_text(input_text):
     }
 
     # Convert predicted and ground truth labels to lists
-    predicted_labels_list = [1 if predicted_labels[label] > 0.5 else 0 for label in predicted_labels]
-    ground_truth_labels_list = [ground_truth_labels[label] for label in predicted_labels]
+    predicted_labels_list = [predicted_labels[label] for label in ground_truth_labels]
+    ground_truth_labels_list = [ground_truth_labels[label] for label in ground_truth_labels]
 
     # Calculate evaluation metrics
-    accuracy = accuracy_score(ground_truth_labels_list, predicted_labels_list)
-    precision = precision_score(ground_truth_labels_list, predicted_labels_list, average='weighted')
-    recall = recall_score(ground_truth_labels_list, predicted_labels_list, average='weighted')
-    f1 = f1_score(ground_truth_labels_list, predicted_labels_list, average='weighted')
+    accuracy = accuracy_score(ground_truth_labels_list, [1 if prob > threshold else 0 for prob in predicted_labels_list])
+    precision = precision_score(ground_truth_labels_list, [1 if prob > threshold else 0 for prob in predicted_labels_list], average='weighted')
+    recall = recall_score(ground_truth_labels_list, [1 if prob > threshold else 0 for prob in predicted_labels_list], average='weighted')
+    f1 = f1_score(ground_truth_labels_list, [1 if prob > threshold else 0 for prob in predicted_labels_list], average='weighted')
 
     # Additional classification report
-    report = classification_report(ground_truth_labels_list, predicted_labels_list)
+    report = classification_report(ground_truth_labels_list, [1 if prob > threshold else 0 for prob in predicted_labels_list])
 
     # Construct output dictionary
     output_dict = {
