@@ -7,7 +7,7 @@ input_file = "data/thirdStep_file.jsonl"
 output_file = "data/Full-Labeled-Data-Final-4465.jsonl"
 
 # Threshold for considering a label
-threshold = 0.5
+threshold = 0.21
 
 # Options for different categories
 options = [
