@@ -87,6 +87,7 @@ Describe the organization of files and directories within the project.
   - `five_examples_annotated.ipynb`
   - `secondStep-score.py`
   - `thirdStep-label.py`
+  - `gradio_interface.py`
 - `requirements.txt`
 - `requirements-dev.txt`
 - `Project.yml`
