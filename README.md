@@ -92,6 +92,7 @@ Describe the organization of files and directories within the project.
 - `requirements.txt`
 - `requirements-dev.txt`
 - `Project.yml`
+- `Final Project Write-Up`
 - `gradio_interface.py`
 - `README.md`
 
