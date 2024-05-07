@@ -1,104 +1,137 @@
-# prodigy-ecfr-textcat
+<!-- WEASEL: AUTO-GENERATED DOCS START (do not remove) -->
 
-https://huggingface.co/spaces/ManjinderUNCC/prodigy-ecfr-textcat
+# 🪐 Weasel Project: Citations of ECFR Banking Regulation in a spaCy pipeline.
 
-## About the Project
+Custom text classification project for spaCy v3 adapted from the spaCy v3
 
-Our goal is to organize these financial institution rules and regulations so financial institutions  can go through newly created rules and regulations to know which departments to send the information to and to allow easy retrieval of these regulations when necessary. Text mining and information retrieval will allow a large step of the process to be automated. Automating these steps will allow less time and effort to be contributed for financial institutions employees. This allows more time and work to be used to accomplish other projects.
+## 📋 project.yml
 
-## Table of Contents
+The [`project.yml`](project.yml) defines the data assets required by the
+project, as well as the available commands and workflows. For details, see the
+[Weasel documentation](https://github.com/explosion/weasel).
 
-- [About the Project](#about-the-project)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [File Structure](#file-structure)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
+### ⏯ Commands
 
-## Getting Started
+The following commands are defined by the project. They
+can be executed using [`weasel run [name]`](https://github.com/explosion/weasel/tree/main/docs/cli.md#rocket-run).
+Commands are only re-run if their inputs have changed.
 
-Instructions on setting up the project on a local machine.
+| Command | Description |
+| --- | --- |
+| `preprocess` | Execute the Python script `firstStep-format.py`, which performs the initial formatting of a dataset file for the first step of the project. This script extracts text and labels from a dataset file in JSONL format and writes them to a new JSONL file in a specific format.
 
-### Prerequisites
-
-Before running the project, ensure you have the following software dependencies installed:
-- [Python 3.x](https://www.python.org/downloads/)
-- [spaCy](https://spacy.io/usage)
-- [Prodigy](https://prodi.gy/docs/) (optional)
-
-### Installation
-
-Follow these step-by-step instructions to install and configure the project:
-
-1. **Clone this repository to your local machine.**
-```bash
-git clone <https://github.com/ManjinderSinghSandhu/prodigy-ecfr-textcat.git>
+Usage:
 ```
-2. Install the required dependencies by running:
-
-```bash
-pip install -r requirements.txt
+spacy project run preprocess
 ```
 
-3. Next, you need to have a Prodigy license key to use Prodigy. (But it's not required) Install Prodigy first:
+Explanation:
+- The script `firstStep-format.py` reads data from the file specified in the `dataset_file` variable (`data/train200.jsonl` by default).
+- It extracts text and labels from each JSON object in the dataset file.
+- If both text and at least one label are available, it writes a new JSON object to the output file specified in the `output_file` variable (`data/firstStep_file.jsonl` by default) with the extracted text and label.
+- If either text or label is missing in a JSON object, a warning message is printed.
+- Upon completion, the script prints a message confirming the processing and the path to the output file.
+ |
+| `train-text-classification-model` | Train the text classification model for the second step of the project using the `secondStep-score.py` script. This script loads a blank English spaCy model and adds a text classification pipeline to it. It then trains the model using the processed data from the first step.
 
-```bash
-python -m pip install prodigy==1.15.2 --extra-index-url https://$PRODIGY_KEY@download.prodi.gy
+Usage:
+```
+spacy project run train-text-classification-model
 ```
 
-This assumes you previously set up your `PRODIGY_KEY` as an environmental variable like:
+Explanation:
+- The script `secondStep-score.py` loads a blank English spaCy model and adds a text classification pipeline to it.
+- It reads processed data from the file specified in the `processed_data_file` variable (`data/firstStep_file.jsonl` by default).
+- The processed data is converted to spaCy format for training the model.
+- The model is trained using the converted data for a specified number of iterations (`n_iter`).
+- Losses are printed for each iteration during training.
+- Upon completion, the trained model is saved to the specified output directory (`./my_trained_model` by default).
+ |
+| `classify-unlabeled-data` | Classify the unlabeled data for the third step of the project using the `thirdStep-label.py` script. This script loads the trained spaCy model from the previous step and classifies each record in the unlabeled dataset.
 
-```bash
-export PRODIGY_KEY=1111-1111-1111-1111
+Usage:
+```
+spacy project run classify-unlabeled-data
 ```
 
-## Usage
+Explanation:
+- The script `thirdStep-label.py` loads the trained spaCy model from the specified model directory (`./my_trained_model` by default).
+- It reads the unlabeled data from the file specified in the `unlabeled_data_file` variable (`data/train.jsonl` by default).
+- Each record in the unlabeled data is classified using the loaded model.
+- The predicted labels for each record are extracted and stored along with the text.
+- The classified data is optionally saved to a file specified in the `output_file` variable (`data/thirdStep_file.jsonl` by default).
+ |
+| `format-labeled-data` | Format the labeled data for the final step of the project using the `finalStep-formatLabel.py` script. This script processes the classified data from the third step and transforms it into a specific format, considering a threshold for label acceptance.
 
-To use the project, follow these steps:
+Usage:
+```
+spacy project run format-labeled-data
+```
 
-1. **Prepare your data:**
-   - Place your dataset files in the `/data` directory.
-   - Optionally, annotate your data using Prodigy and save the annotations in the `/data` directory.
+Explanation:
+- The script `finalStep-formatLabel.py` reads classified data from the file specified in the `input_file` variable (`data/thirdStep_file.jsonl` by default).
+- For each record, it determines accepted categories based on a specified threshold.
+- It constructs an output record containing the text, predicted labels, accepted categories, answer (accept/reject), and options with meta information.
+- The transformed data is written to the file specified in the `output_file` variable (`data/train4465.jsonl` by default).
+ |
+| `evaluate-model` | Evaluate the trained model using the evaluation data and print the metrics.
 
-2. **Train the text classification model:**
-   - Run the training script located in the `/python_Code` directory.
+Usage:
+```
+spacy project run evaluate-model
+```
 
-3. **Evaluate the model:**
-   - Use the evaluation script to assess the model's performance on labeled data.
+Explanation:
+- The script `evaluate_model.py` loads the trained model and evaluates it using the golden evaluation data.
+- It calculates evaluation metrics such as accuracy, precision, recall, and F1-score.
+- The metrics are printed to the console.
+ |
+| `set-threshold` | Set the threshold for text categorization in a trained model.
 
-4. **Make predictions:**
-   - Apply the trained model to new, unlabeled data to classify it into relevant categories.
+Usage:
+```
+spacy project run set-threshold <model_path> <threshold>
+```
 
+Explanation:
+- The script loads the trained model from the specified path.
+- It sets the threshold for text categorization to the specified value.
+ |
 
-## File Structure
+### ⏭ Workflows
 
-Describe the organization of files and directories within the project.
+The following workflows are defined by the project. They
+can be executed using [`weasel run [name]`](https://github.com/explosion/weasel/tree/main/docs/cli.md#rocket-run)
+and will run the specified commands in order. Commands are only re-run if their
+inputs have changed.
 
-- `/data`
-  - `five_examples_annotated5.jsonl`
-  - `goldenEval.jsonl`
-  - `train.jsonl`
-  - `train200.jsonl`
-- `/python_Code`
-  - `finalStep-formatLabel.py`
-  - `firstStep-format.py`
-  - `five_examples_annotated.ipynb`
-  - `secondStep-score.py`
-  - `thirdStep-label.py`
-  - `evaluate_model.py`
-  - `threshold.py`
-- `requirements.txt`
-- `requirements-dev.txt`
-- `Project.yml`
-- `prodigy-ecfr-textcatc report.docx`
-- `gradio_interface.py`
-- `README.md`
+| Workflow | Steps |
+| --- | --- |
+| `train` | `preprocess` &rarr; `train-text-classification-model` &rarr; `classify-unlabeled-data` &rarr; `format-labeled-data` |
+| `evaluate` | `set-threshold` &rarr; `evaluate-model` |
 
-## License
+### 🗂 Assets
 
-- Package A: MIT License
-- Package B: Apache License 2.0
-- Prodigy 
+The following assets are defined by the project. They can
+be fetched by running [`weasel assets`](https://github.com/explosion/weasel/tree/main/docs/cli.md#open_file_folder-assets)
+in the project directory.
 
+| File | Source | Description |
+| --- | --- | --- |
+| [`data/firstStep_file.jsonl`](data/firstStep_file.jsonl) | Local | JSONL file containing formatted data from the first step |
+| `data/five_examples_annotated5.jsonl` | Local | JSONL file containing five annotated examples |
+| [`data/goldenEval.jsonl`](data/goldenEval.jsonl) | Local | JSONL file containing golden evaluation data |
+| [`data/thirdStep_file.jsonl`](data/thirdStep_file.jsonl) | Local | JSONL file containing classified data from the third step |
+| [`data/train.jsonl`](data/train.jsonl) | Local | JSONL file containing training data |
+| [`data/train200.jsonl`](data/train200.jsonl) | Local | JSONL file containing initial training data |
+| `data/train4465.jsonl` | Local | JSONL file containing formatted and labeled training data |
+| [`python_Code/finalStep-formatLabel.py`](python_Code/finalStep-formatLabel.py) | Local | Python script for formatting labeled data in the final step |
+| [`python_Code/firstStep-format.py`](python_Code/firstStep-format.py) | Local | Python script for formatting data in the first step |
+| `python_Code/five_examples_annotated.ipynb` | Local | Jupyter notebook containing five annotated examples |
+| [`python_Code/secondStep-score.py`](python_Code/secondStep-score.py) | Local | Python script for scoring data in the second step |
+| [`python_Code/thirdStep-label.py`](python_Code/thirdStep-label.py) | Local | Python script for labeling data in the third step |
+| `python_Code/train_eval_split.ipynb` | Local | Jupyter notebook for training and evaluation data splitting |
+| [`data/firstStep_file.jsonl`](data/firstStep_file.jsonl) | Local | Python script for evaluating the trained model |
+| [`README.md`](README.md) | Local | Markdown file containing project documentation |
+
+<!-- WEASEL: AUTO-GENERATED DOCS END (do not remove) -->
