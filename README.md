@@ -4,6 +4,8 @@
 
 Custom text classification project for spaCy v3 adapted from the spaCy v3
 
+## https://huggingface.co/spaces/ManjinderUNCC/prodigy-ecfr-textcat
+
 ## 📋 project.yml
 
 The [`project.yml`](project.yml) defines the data assets required by the
